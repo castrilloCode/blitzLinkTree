@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blitz Linktree</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #11111d, #10172b, #0f3460);
+        color: #ffffff;
+      }
+
+      .container {
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+        background: #222242;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px #00000080;
+      }
+      .input-section {
+        margin-top: 20px;
+        width: 100%;
+      }
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+        height: 300px;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #1f1f2e;
+        color: #ffffff;
+        border: 1px solid #4c4faf;
+        font-family: monospace;
+        resize: vertical;
+        scrollbar-width: thin;
+        scrollbar-color: #4c4faf #1f1f2e;
+      }
+
+      /* Webkit scrollbar styles */
+      textarea::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      textarea::-webkit-scrollbar-track {
+        background: #1f1f2e;
+        border-radius: 4px;
+      }
+
+      textarea::-webkit-scrollbar-thumb {
+        background: #4c4faf;
+        border-radius: 4px;
+      }
+
+      textarea::-webkit-scrollbar-thumb:hover {
+        background: #45a049;
+      }
+
+      textarea:focus {
+        outline: none;
+        border-color: #45a049;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #4c4faf;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #ffffff;
+      }
+
+      .link {
+        display: block;
+        margin: 10px 0;
+        padding: 15px;
+        background-color: #4c4faf;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .link:hover {
+        background-color: #282a57;
+      }
+
+      .footer {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #cccccc;
+        cursor: pointer;
+      }
+
+      .footer a {
+        color: #282a57;
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Blitz Linktree</h1>
+        <h3>Release Calendar Prompter</h>
+        <div class="input-section">
+          <textarea
+            id="input"
+            placeholder="Escribe tu instrucción aquí..."
+          ></textarea>
+          <button onclick="processInput()">Procesar</button>
+          <textarea
+            id="output"
+            readonly
+            placeholder="El resultado en formato Markdown aparecerá aquí..."
+          ></textarea>
+          <button onclick="copyToClipboard()">Copiar Resultado</button>
+          <button onclick="clearInput()">Limpiar</button>
+        </div>
+
+      <div class="footer" onclick="launchConfetti()">
+        <p>Blitz QA team <a href="#">@j.cuelli & @c.castrillo</a></p>
+      </div>
+    </div>
+
+    <script>
+  const JIRA_ICONS = {
+    REL: '![Release](https://jira.itspty.com/secure/viewavatar?size=xsmall&avatarId=10906&avatarType=issuetype "Release")',
+    US: '![Story](https://jira.itspty.com/download/resources/com.atlassian.jira-core-project-templates:jira-softwaredevelopment-item/story.png "Story")',
+    TUS: '![Technical Story](https://jira.itspty.com/secure/viewavatar?size=xsmall&avatarId=11900&avatarType=issuetype "Technical Story")',
+    BUG: '![Bug](https://jira.itspty.com/secure/viewavatar?size=xsmall&avatarId=10903&avatarType=issuetype "Bug")',
+    TASK: '![Task](https://jira.itspty.com/secure/viewavatar?size=xsmall&avatarId=10918&avatarType=issuetype "Task")',
+  };
+
+  function getWeekNumber(date) {
+    const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+    const pastDaysOfYear = (date.getTime() - firstDayOfYear.getTime()) / 86400000;
+    return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+  }
+
+  function parseDate(dateStr) {
+    const [day, month] = dateStr.split("/");
+    const months = {
+      jan: 0,
+      feb: 1,
+      mar: 2,
+      apr: 3,
+      may: 4,
+      jun: 5,
+      jul: 6,
+      aug: 7,
+      sep: 8,
+      oct: 9,
+      nov: 10,
+      dec: 11,
+    };
+    const monthNum = months[month.toLowerCase()] || parseInt(month) - 1;
+    return new Date(2024, monthNum, parseInt(day));
+  }
+
+  function formatDate(date) {
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    return `* **${days[date.getDay()]} ${date.getDate()}**`;
+  }
+
+  function parseJiraTask(line) {
+    // Parse release line
+    const releaseMatch = line.match(/REL-(\d+)\s*\(([^)]+)\)/);
+    if (releaseMatch) {
+      return {
+        type: "REL",
+        id: `REL-${releaseMatch[1]}`,
+        time: releaseMatch[2],
+      };
+    }
+
+    // Parse task line with location and assignee
+    const taskMatch = line.match(
+      /(\w+)\s+SBP-(\d+)(?:.*?@([a-z.]+))?(?:\s*\(([^)]+)\))?/i
+    );
+    if (taskMatch) {
+      return {
+        type: taskMatch[1],
+        id: `SBP-${taskMatch[2]}`,
+        assignee: taskMatch[3] ? `@${taskMatch[3]}` : "",
+        location: taskMatch[4] || "",
+      };
+    }
+
+    throw new Error("Invalid task format");
+  }
+
+  function processInput() {
+    try {
+      const input = document.getElementById("input").value;
+      const currentDate = new Date();
+      const weekNumber = getWeekNumber(currentDate);
+      const year = currentDate.getFullYear().toString().slice(-2);
+
+      let result = [`:blitz: SB-OFF-UI Y${year}-W${weekNumber} @all`, ""];
+
+      const sections = input.trim().split(/\n\s*\n/);
+
+      for (const section of sections) {
+        const lines = section.trim().split("\n");
+        if (!lines[0]?.startsWith("*")) continue;
+
+        const dateStr = lines[0].match(/\*\s*\*\*([^*]+)\*\*/)?.[1];
+        if (!dateStr) continue;
+
+        const date = parseDate(dateStr);
+        result.push(formatDate(date));
+
+        let relGroup = [];
+        let inRel = false;
+
+        for (const line of lines.slice(1)) {
+          try {
+            const taskInfo = parseJiraTask(line);
+
+            if (taskInfo.type === "REL") {
+              // Push current REL group and reset
+              if (relGroup.length > 0) {
+                result.push(relGroup.join("\n"));
+                relGroup = [];
+              }
+              // Start new REL group
+              inRel = true;
+              relGroup.push(
+                `${JIRA_ICONS[taskInfo.type]} [${taskInfo.id}](https://jira.itspty.com/browse/${taskInfo.id}) (${taskInfo.time})`
+              );
+            } else if (inRel) {
+              // Add task to current REL group
+              const locationText = taskInfo.location ? ` (${taskInfo.location})` : "";
+              const assigneeText = taskInfo.assignee ? ` (${taskInfo.assignee})` : "";
+              relGroup.push(
+                `${JIRA_ICONS[taskInfo.type]} [${taskInfo.id}](https://jira.itspty.com/browse/${taskInfo.id})${assigneeText}${locationText}`
+              );
+            }
+          } catch (err) {
+            console.error("Error processing task:", line, err);
+            continue;
+          }
+        }
+
+        // Add any remaining REL group to the result
+        if (relGroup.length > 0) {
+          result.push(relGroup.join("\n"));
+        }
+
+        result.push(""); // Add a blank line after each date
+      }
+
+      document.getElementById("output").value = result.join("\n");
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
+  function clearInput() {
+    document.getElementById("input").value = "";
+    document.getElementById("output").value = "";
+  }
+
+  function copyToClipboard() {
+    const output = document.getElementById("output");
+    output.select();
+    document.execCommand("copy");
+    alert("Resultado copiado al portapapeles");
+  }
+
+      function launchConfetti() {
+        const confettiColors = [
+          "#4caf50",
+          "#ffeb3b",
+          "#ff5722",
+          "#03a9f4",
+          "#e91e63",
+        ];
+        const confettiCount = 150;
+
+        // Eliminar contenedor previo si existe
+        const existingContainer = document.querySelector(".confetti-container");
+        if (existingContainer) {
+          document.body.removeChild(existingContainer);
+        }
+
+        const confettiContainer = document.createElement("div");
+        confettiContainer.className = "confetti-container";
+        confettiContainer.style.position = "fixed";
+        confettiContainer.style.top = "0";
+        confettiContainer.style.left = "0";
+        confettiContainer.style.width = "100%";
+        confettiContainer.style.height = "100%";
+        confettiContainer.style.pointerEvents = "none";
+        document.body.appendChild(confettiContainer);
+
+        for (let i = 0; i < confettiCount; i++) {
+          const confetti = document.createElement("div");
+          confetti.style.position = "absolute";
+          confetti.style.width = `${Math.random() * 8 + 4}px`; // Tamaño entre 4px y 12px
+          confetti.style.height = confetti.style.width; // Mantener cuadrado
+          confetti.style.backgroundColor =
+            confettiColors[Math.floor(Math.random() * confettiColors.length)];
+          confetti.style.top = `${Math.random() * 100}%`;
+          confetti.style.left = `${Math.random() * 100}%`;
+          confetti.style.opacity = Math.random();
+          confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+          confetti.style.animation = `fall ${
+            Math.random() * 3 + 2
+          }s ease-out forwards`;
+          confettiContainer.appendChild(confetti);
+        }
+
+        setTimeout(() => {
+          document.body.removeChild(confettiContainer);
+        }, 4000);
+      }
+
+      // Confetti fall animation
+      const style = document.createElement("style");
+      style.innerHTML = `
+            @keyframes fall {
+                0% {
+                    transform: translateY(-100vh) rotate(0deg);
+                }
+                100% {
+                    transform: translateY(100vh) rotate(360deg);
+                }
+            }
+        `;
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>

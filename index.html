@@ -1,135 +1,209 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blitz Linktree</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #11111d, #10172b, #0f3460);
-            color: #ffffff;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0d0d16, #10172b, #0f3460);
+        color: #ffffff;
+      }
 
-        .container {
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-            background: #2c2c54;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-        }
+      .container {
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+        background: #2c2c54;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      }
 
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #4c4faf;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
 
-        .link {
-            display: block;
-            margin: 10px 0;
-            padding: 15px;
-            background-color: #4c4faf;
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+      button:hover {
+        background-color: #353875;
+      }
 
-        .link:hover {
-            background-color: #7745a0;
-        }
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #ffffff;
+      }
 
-        .footer {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #cccccc;
-            cursor: pointer;
-        }
+      .link {
+        display: block;
+        margin: 10px 0;
+        padding: 15px;
+        background-color: #4c4faf;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
 
-        .footer a {
-            color: #7745a0;
-            text-decoration: none;
-        }
+      .link:hover {
+        background-color: #32356e;
+      }
 
-        .footer a:hover {
-            text-decoration: underline;
-        }
+      .footer {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #cccccc;
+        cursor: pointer;
+      }
+
+      .footer a {
+        color: #7745a0;
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>Blitz Linktree</h1>
-        <a href="https://meet.google.com/mre-ygtq-btz" class="link" target="_blank">La Baticueva</a>
-        <a href="https://jira.itspty.com/browse/SBP-28568" class="link" target="_blank">TP Regressions</a>
-        <a href="https://jenkins.itspty.com/job/Platform/job/Websites/job/SAS/job/webapp-cd-trigger" class="link" target="_blank">Deploy SAS</a>
-        <a href="https://jenkins.itspty.com/job/Platform/job/Websites/job/Venus/job/webapp-sb-cd" class="link" target="_blank">Deploy Venus</a>
-        <a href="https://jenkins.itspty.com/job/Platform/job/Websites/job/SAS/job/webapp-e2e/job/webapp-e2e/job/master/" class="link" target="_blank">E2E SAS</a>
-        <a href="https://jenkins.itspty.com/job/Platform/job/Websites/job/Venus/job/venus-e2e-tests/job/venus-e2e/job/master/" class="link" target="_blank">E2E VENUS</a>
-        <a href="https://chatgpt.com/share/67081bd1-eba0-800c-b076-bc43882c837f" class="link" target="_blank">Prompt Releases</a>
-        <a href="https://ppd.betonline.ag/content/admin/" class="link" target="_blank">Strapi</a>
-        <a href="https://sasha.ppd.pposervices.local/" class="link" target="_blank">Sasha</a>
-        <a href="https://confluence.itspty.com/pages/viewpage.action?pageId=291688416" class="link" target="_blank">Most popular trigger</a>
-
-        <div class="footer" onclick="launchConfetti()">
-            <p>Blitz QA team <a href="#">@j.cuelli & @c.castrillo</a></p>
-        </div>
+      <h1>Blitz Linktree</h1>
+      <a
+        href="https://meet.google.com/mre-ygtq-btz"
+        class="link"
+        target="_blank"
+        >La Baticueva</a
+      >
+      <a
+        href="https://jira.itspty.com/browse/SBP-28568"
+        class="link"
+        target="_blank"
+        >TP Regressions</a
+      >
+      <a
+        href="https://jenkins.itspty.com/job/Platform/job/Websites/job/SAS/job/webapp-cd-trigger"
+        class="link"
+        target="_blank"
+        >Deploy SAS</a
+      >
+      <a
+        href="https://jenkins.itspty.com/job/Platform/job/Websites/job/Venus/job/webapp-sb-cd"
+        class="link"
+        target="_blank"
+        >Deploy Venus</a
+      >
+      <a
+        href="https://jenkins.itspty.com/job/Platform/job/Websites/job/SAS/job/webapp-e2e/job/webapp-e2e/job/master/"
+        class="link"
+        target="_blank"
+        >E2E SAS</a
+      >
+      <a
+        href="https://jenkins.itspty.com/job/Platform/job/Websites/job/Venus/job/venus-e2e-tests/job/venus-e2e/job/master/"
+        class="link"
+        target="_blank"
+        >E2E VENUS</a
+      >
+      <a
+        href="https://chatgpt.com/share/67081bd1-eba0-800c-b076-bc43882c837f"
+        class="link"
+        target="_blank"
+        >Prompt Releases</a
+      >
+      <a
+        href="https://ppd.betonline.ag/content/admin/"
+        class="link"
+        target="_blank"
+        >Strapi</a
+      >
+      <a
+        href="https://sasha.ppd.pposervices.local/"
+        class="link"
+        target="_blank"
+        >Sasha</a
+      >
+      <a
+        href="https://confluence.itspty.com/pages/viewpage.action?pageId=291688416"
+        class="link"
+        target="_blank"
+        >Most popular trigger</a
+      >
+      <div class="footer" onclick="launchConfetti()">
+        <p>Blitz QA team <a href="#">@j.cuelli & @c.castrillo</a></p>
+      </div>
     </div>
 
     <script>
-        function launchConfetti() {
-            const confettiColors = ['#4caf50', '#ffeb3b', '#ff5722', '#03a9f4', '#e91e63'];
-            const confettiCount = 150;
+      function launchConfetti() {
+        const confettiColors = [
+          "#4caf50",
+          "#ffeb3b",
+          "#ff5722",
+          "#03a9f4",
+          "#e91e63",
+        ];
+        const confettiCount = 150;
 
-            // Eliminar contenedor previo si existe
-            const existingContainer = document.querySelector('.confetti-container');
-            if (existingContainer) {
-                document.body.removeChild(existingContainer);
-            }
-
-            const confettiContainer = document.createElement('div');
-            confettiContainer.className = 'confetti-container';
-            confettiContainer.style.position = 'fixed';
-            confettiContainer.style.top = '0';
-            confettiContainer.style.left = '0';
-            confettiContainer.style.width = '100%';
-            confettiContainer.style.height = '100%';
-            confettiContainer.style.pointerEvents = 'none';
-            document.body.appendChild(confettiContainer);
-
-            for (let i = 0; i < confettiCount; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.position = 'absolute';
-                confetti.style.width = `${Math.random() * 8 + 4}px`; // Tamaño entre 4px y 12px
-                confetti.style.height = confetti.style.width; // Mantener cuadrado
-                confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
-                confetti.style.top = `${Math.random() * 100}%`;
-                confetti.style.left = `${Math.random() * 100}%`;
-                confetti.style.opacity = Math.random();
-                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-                confetti.style.animation = `fall ${Math.random() * 3 + 2}s ease-out forwards`;
-                confettiContainer.appendChild(confetti);
-            }
-
-            setTimeout(() => {
-                document.body.removeChild(confettiContainer);
-            }, 4000);
+        // Eliminar contenedor previo si existe
+        const existingContainer = document.querySelector(".confetti-container");
+        if (existingContainer) {
+          document.body.removeChild(existingContainer);
         }
 
-        // Confetti fall animation
-        const style = document.createElement('style');
-        style.innerHTML = `
+        const confettiContainer = document.createElement("div");
+        confettiContainer.className = "confetti-container";
+        confettiContainer.style.position = "fixed";
+        confettiContainer.style.top = "0";
+        confettiContainer.style.left = "0";
+        confettiContainer.style.width = "100%";
+        confettiContainer.style.height = "100%";
+        confettiContainer.style.pointerEvents = "none";
+        document.body.appendChild(confettiContainer);
+
+        for (let i = 0; i < confettiCount; i++) {
+          const confetti = document.createElement("div");
+          confetti.style.position = "absolute";
+          confetti.style.width = `${Math.random() * 8 + 4}px`; // Tamaño entre 4px y 12px
+          confetti.style.height = confetti.style.width; // Mantener cuadrado
+          confetti.style.backgroundColor =
+            confettiColors[Math.floor(Math.random() * confettiColors.length)];
+          confetti.style.top = `${Math.random() * 100}%`;
+          confetti.style.left = `${Math.random() * 100}%`;
+          confetti.style.opacity = Math.random();
+          confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+          confetti.style.animation = `fall ${
+            Math.random() * 3 + 2
+          }s ease-out forwards`;
+          confettiContainer.appendChild(confetti);
+        }
+
+        setTimeout(() => {
+          document.body.removeChild(confettiContainer);
+        }, 4000);
+      }
+
+      // Confetti fall animation
+      const style = document.createElement("style");
+      style.innerHTML = `
             @keyframes fall {
                 0% {
                     transform: translateY(-100vh) rotate(0deg);
@@ -139,7 +213,7 @@
                 }
             }
         `;
-        document.head.appendChild(style);
+      document.head.appendChild(style);
     </script>
-</body>
+  </body>
 </html>
