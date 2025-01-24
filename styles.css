@@ -1,122 +1,158 @@
 body {
-    font-family: 'Roboto', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #121212, #181818, #282828);
-    color: #ffffff;
-  }
-  
-  .container {
-    text-align: center;
-    width: 90%;
-    max-width: 400px;
-    background: #2c2e32;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
-  }
+  font-family: 'Roboto', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #121212, #181818, #282828);
+  color: #ffffff;
+}
 
-  .input-section {
-    margin-top: 20px;
-    width: 100%;
-  }
-  textarea {
-    width: 100%;
-    box-sizing: border-box;
-    height: 300px;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 8px;
-    background-color: #212121;
-    color: #ffffff;
-    border: 1px solid #4caf5b;
-    font-family: monospace;
-    resize: vertical;
-    scrollbar-width: thin;
-    scrollbar-color: #1db954 #1f1f2e;
-  }
+.container {
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  background: #2c2e32;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+}
 
-  /* Webkit scrollbar styles */
-  textarea::-webkit-scrollbar {
-    width: 8px;
-  }
+/* Nueva clase para alinear el header */
+.header {
+  display: flex; /* Alineación en fila */
+  align-items: center; /* Centrado vertical de ícono y título */
+  justify-content: center; /* Centra todo en el contenedor */
+  gap: 10px; /* Espacio entre el título y el ícono */
+  margin-bottom: 20px; /* Espacio debajo del header */
+}
 
-  textarea::-webkit-scrollbar-track {
-    background: #1f1f2e;
-    border-radius: 4px;
-  }
+h1 {
+  font-size: 24px;
+  margin: 0; /* Elimina márgenes extra */
+  color: #ffffff;
+}
 
-  textarea::-webkit-scrollbar-thumb {
-    background: #4caf5b;
-    border-radius: 4px;
-  }
+/* Estilo del ícono Home */
+.home-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #1db954;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  margin-left: 10px; /* Ajuste para separación adicional */
+}
 
-  textarea::-webkit-scrollbar-thumb:hover {
-    background: #45a049;
-  }
+.home-icon:hover {
+  background-color: #1ed760;
+}
 
-  textarea:focus {
-    outline: none;
-    border-color: #45a049;
-  }
-  
-  button {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    background-color: #42464e;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  button:hover {
-    background-color: #30724a;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #ffffff;
-  }
-  
-  .link {
-    display: block;
-    margin: 10px 0;
-    padding: 15px;
-    background-color: #42464e;
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 8px;
-    transition: background-color 0.2s ease-in-out;
-  }
-  /*botones*/
-  .link:hover {
-    background-color: #30724a;
-  }
-  
-  .footer {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #cccccc;
-    cursor: pointer;
-  }
-  
-  .footer a {
-    color: #4caf5b;
-    text-decoration: none;
-  }
-  
-  .footer a:hover {
-    text-decoration: underline;
-  }  
+.home-icon svg {
+  fill: #ffffff;
+  width: 24px;
+  height: 24px;
+}
+
+/* Restante CSS */
+.input-section {
+  margin-top: 20px;
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  height: 300px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #212121;
+  color: #ffffff;
+  border: 1px solid #4caf5b;
+  font-family: monospace;
+  resize: vertical;
+  scrollbar-width: thin;
+  scrollbar-color: #1db954 #1f1f2e;
+}
+
+textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: #1f1f2e;
+  border-radius: 4px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: #4caf5b;
+  border-radius: 4px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background: #45a049;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #45a049;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  background-color: #42464e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #30724a;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.link {
+  display: block;
+  margin: 10px 0;
+  padding: 15px;
+  background-color: #42464e;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.link:hover {
+  background-color: #30724a;
+}
+
+.footer {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #cccccc;
+  cursor: pointer;
+}
+
+.footer a {
+  color: #4caf5b;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
