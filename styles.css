@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -17,8 +17,8 @@ body {
     max-width: 400px;
     background: #2c2e32;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
   }
 
   .input-section {
@@ -31,14 +31,14 @@ body {
     height: 300px;
     margin-bottom: 10px;
     padding: 10px;
-    border-radius: 5px;
-    background-color: #2c2e32;
+    border-radius: 8px;
+    background-color: #212121;
     color: #ffffff;
     border: 1px solid #4caf5b;
     font-family: monospace;
     resize: vertical;
     scrollbar-width: thin;
-    scrollbar-color: #4c4faf #1f1f2e;
+    scrollbar-color: #1db954 #1f1f2e;
   }
 
   /* Webkit scrollbar styles */
@@ -67,18 +67,19 @@ body {
   
   button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 10px;
     background-color: #42464e;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
   }
   
   button:hover {
     background-color: #30724a;
+    transition: background-color 0.2s ease-in-out;
   }
   
   h1 {
@@ -96,8 +97,8 @@ body {
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    border-radius: 8px;
+    transition: background-color 0.2s ease-in-out;
   }
   /*botones*/
   .link:hover {
