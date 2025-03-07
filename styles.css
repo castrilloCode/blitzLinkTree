@@ -21,22 +21,20 @@ body {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
 }
 
-/* Nueva clase para alinear el header */
 .header {
-  display: flex; /* Alineación en fila */
-  align-items: center; /* Centrado vertical de ícono y título */
-  justify-content: center; /* Centra todo en el contenedor */
-  gap: 10px; /* Espacio entre el título y el ícono */
-  margin-bottom: 20px; /* Espacio debajo del header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 h1 {
   font-size: 24px;
-  margin: 0; /* Elimina márgenes extra */
+  margin: 0;
   color: #ffffff;
 }
 
-/* Estilo del ícono Home */
 .home-icon {
   width: 40px;
   height: 40px;
@@ -49,7 +47,7 @@ h1 {
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
-  margin-left: 10px; /* Ajuste para separación adicional */
+  margin-left: 10px;
 }
 
 .home-icon:hover {
@@ -62,8 +60,8 @@ h1 {
   height: 24px;
 }
 
-/* Restante CSS */
 .input-section {
+  position: relative;
   margin-top: 20px;
   width: 100%;
 }
@@ -120,7 +118,7 @@ button {
 }
 
 button:hover {
-  background-color: #30724a;
+  background-color: #1ca94d;
   transition: background-color 0.2s ease-in-out;
 }
 
@@ -138,7 +136,7 @@ button:hover {
 }
 
 .link:hover {
-  background-color: #30724a;
+  background-color: #159341;
 }
 
 .footer {
@@ -155,4 +153,26 @@ button:hover {
 
 .footer a:hover {
   text-decoration: underline;
+}
+
+/* Estilos del Tooltip */
+.tooltip {
+  position: fixed;
+  background: #333;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  white-space: pre-line;
+  max-width: 320px;
+  z-index: 1000;
+  font-family: monospace;
+  line-height: 1.4;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  display: none; /* Oculto por defecto */
+  pointer-events: none; /* Evita interferir con el cursor */
+  text-align: left;
+}
+
+#input:placeholder-shown:hover + .tooltip {
+  display: block;
 }

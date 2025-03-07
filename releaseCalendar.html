@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prompt Releases 2.0</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" href="/assets/fav.png"/>
   </head>
   <body>
     <div class="container">
@@ -21,6 +22,17 @@
           id="input"
           placeholder="Escribe tu instrucción aquí..."
         ></textarea>
+        <div id="dynamicTooltip" class="tooltip">
+          Ejemplo estructura imput:<br>
+          Tue 4 feb
+          REL-1 @ 7 am
+          US SBP-20575 @m.alvarez
+          REL-2 @ 9 am
+          US SBP-20575 @m.alvarez<br>
+          Tue 11 feb
+          REL-3 @ 9 am
+          BUG SBP-35871 @m.alvarez
+        </div>
         <button onclick="processInput()">Procesar</button>
         <textarea
           id="output"
@@ -37,6 +49,27 @@
     </div>
 
     <script>
+
+document.getElementById('input').addEventListener('mousemove', (e) => {
+  const tooltip = document.getElementById('dynamicTooltip');
+  const textarea = document.getElementById('input');
+  
+  // Mostrar solo cuando está vacío y con placeholder visible
+  if (!textarea.value.trim() && textarea.placeholder) {
+    tooltip.style.display = 'block';
+    // Posicionar al lado del cursor con offset
+    tooltip.style.left = `${e.pageX + 15}px`;
+    tooltip.style.top = `${e.pageY - 10}px`;
+  } else {
+    tooltip.style.display = 'none';
+  }
+});
+
+// Ocultar cuando sale del textarea
+document.getElementById('input').addEventListener('mouseleave', () => {
+  document.getElementById('dynamicTooltip').style.display = 'none';
+});
+
       const JIRA_ICONS = {
         REL: '![Release](https://jira.itspty.com/secure/viewavatar?size=xsmall&avatarId=10906&avatarType=issuetype "Release")',
         US: '![Story](https://jira.itspty.com/download/resources/com.atlassian.jira-core-project-templates:jira-softwaredevelopment-item/story.png "Story")',
